@@ -1,5 +1,6 @@
 package dev.fujioka.java.avancado.web.resource;
 
+import dev.fujioka.java.avancado.web.dto.ProfessorDTO;
 import dev.fujioka.java.avancado.web.model.Professor;
 import dev.fujioka.java.avancado.web.service.ProfessorService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,10 +23,10 @@ public class ProfessorResource {
 
     @GetMapping("/listarprofessor/{id}")
     public Professor listarprofessorPorId(@PathVariable int id){
-        return professorService.BuscarPorId(id);
+        return professorService.buscarPorId(id);
     }
     @PostMapping("/novoprofessor")
-    public ResponseEntity<Professor> inserirNovoprofessor(@RequestBody Professor professor){
+    public ResponseEntity<ProfessorDTO> inserirNovoprofessor(@RequestBody Professor professor){
 
         return ResponseEntity.ok(professorService.salvar(professor));
     }

@@ -1,6 +1,7 @@
 package dev.fujioka.java.avancado.web.resource;
 
 
+import dev.fujioka.java.avancado.web.dto.AlunoDTO;
 import dev.fujioka.java.avancado.web.model.Aluno;
 import dev.fujioka.java.avancado.web.service.AlunoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,24 +26,21 @@ public class AlunoResource {
     public Aluno listarAlunoPorId(@PathVariable int id){
         return alunoService.BuscarPorId(id);
     }
-    @PostMapping("/novoaluno")
-    public ResponseEntity<Aluno> inserirNovoAluno(@RequestBody Aluno aluno){
 
-        return ResponseEntity.ok(alunoService.salvar(aluno));
+    @PostMapping("/novoaluno")
+    public ResponseEntity<AlunoDTO> inserirNovoAluno(@RequestBody Aluno aluno){
+       return ResponseEntity.ok(alunoService.salvar(aluno));
     }
 
     @PutMapping("/editaraluno/{id}")
     public ResponseEntity<Aluno> editarAluno(@RequestBody Aluno aluno){
-
         return ResponseEntity.ok(alunoService.alterar(aluno));
     }
 
     @DeleteMapping("/excluiraluno/{id}")
     public ResponseEntity <String> deletarAluno(@PathVariable int id){
         alunoService.excluir(id);
-
         return ResponseEntity.ok().build();
-
     }
 
 }

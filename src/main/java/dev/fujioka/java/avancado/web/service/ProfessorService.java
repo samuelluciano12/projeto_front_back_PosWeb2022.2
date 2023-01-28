@@ -1,5 +1,6 @@
 package dev.fujioka.java.avancado.web.service;
 
+import dev.fujioka.java.avancado.web.dto.ProfessorDTO;
 import dev.fujioka.java.avancado.web.model.Professor;
 import dev.fujioka.java.avancado.web.repository.ProfessorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,9 +18,13 @@ public class ProfessorService {
     @Autowired
     private JmsTemplate jmsTemplate;
 
-    public Professor salvar(Professor professor){
+    public ProfessorDTO salvar(Professor professor){
+        professor = professorRepository.save(professor);
         jmsTemplate.convertAndSend("matricula_professor_queue",professor);
-        return professorRepository.save(professor);
+        return ProfessorDTO.builder()
+                .nome(professor.getNome())
+                .idade(professor.getIdade())
+                .build();
     }
     public List<Professor> listarprofessores(){
         return professorRepository.findAll();
@@ -36,7 +41,7 @@ public class ProfessorService {
         return professorRepository.save(professor);
     }
 
-    public Professor BuscarPorId(int id){
+    public Professor buscarPorId(int id){
         return professorRepository.findById(id).orElseThrow();
     }
 }

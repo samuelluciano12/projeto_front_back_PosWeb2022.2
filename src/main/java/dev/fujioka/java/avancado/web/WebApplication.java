@@ -3,6 +3,7 @@ package dev.fujioka.java.avancado.web;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jms.DefaultJmsListenerContainerFactoryConfigurer;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.context.annotation.Bean;
 import org.springframework.jms.annotation.EnableJms;
 import org.springframework.jms.config.DefaultJmsListenerContainerFactory;
@@ -14,6 +15,7 @@ import org.springframework.jms.support.converter.MessageType;
 import javax.jms.ConnectionFactory;
 
 @SpringBootApplication
+@EnableDiscoveryClient
 @EnableJms
 public class WebApplication{
 
@@ -26,6 +28,7 @@ public class WebApplication{
         DefaultJmsListenerContainerFactory factory = new DefaultJmsListenerContainerFactory();
         return factory;
     }
+
     @Bean
     public MessageConverter jacksonJmsMessageConverter(){
         MappingJackson2MessageConverter converter = new MappingJackson2MessageConverter();
