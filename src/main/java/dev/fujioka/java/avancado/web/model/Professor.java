@@ -5,11 +5,12 @@ import lombok.Setter;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import java.io.Serializable;
 
 @Entity
 @Getter
 @Setter
-public class Professor {
+public class Professor implements Serializable {
     @Id
     private int id;
 
